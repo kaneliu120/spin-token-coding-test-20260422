@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   tokenName: 'SPIN',
   totalSupply: 1_000_000_000,
   contractAddress: null, // null = TBA
-  blockchain: 'BNB Chain',
+  blockchain: 'Ethereum (ERC-20)',
   whitepaperUrl: null,   // null = Coming Soon
   communityLinks: {
     discord: 'https://discord.gg/spinbattles',
@@ -39,59 +39,59 @@ export const SITE_CONFIG = {
 };
 
 export const SPIN_SALE_INFO = {
-  eyebrow: 'Sale Overview',
-  title: 'Key details for the SPIN token sale',
+  eyebrow: 'Private Sale',
+  title: 'Private sale details for the SPIN token',
   summary:
-    'Review the main sale terms before entering the purchase flow. Final pricing, allocation limits, and payment rails will be locked before the public launch.',
+    'Review the confirmed private-sale terms before entering the purchase flow. Pricing, payment methods, and allocation limits are now defined, while the claim and vesting start date remains to be announced.',
   tokenPrice: {
-    value: 'TBA',
-    helper: 'Final public sale pricing will be announced before launch.',
+    value: '$0.10',
+    helper: 'Each SPIN token is currently offered at a private-sale price of $0.10.',
   },
   status: {
-    label: 'Sale terms pending final confirmation',
-    note: 'Displayed values are structured for launch readiness and will be updated once the final sale configuration is published.',
+    label: 'Private sale terms confirmed',
+    note: 'Claim and vesting start date is still TBA and will be published once the post-sale schedule is finalized.',
   },
   metrics: [
     {
       id: 'accepted-payment-methods',
       label: 'Accepted Payment Methods',
-      value: ['BNB', 'ETH'],
-      helper: 'Additional payment rails can be enabled once the final launch setup is confirmed.',
+      value: ['USDT', 'ETH', 'Credit Card'],
+      helper: 'Buyers can participate using stablecoin, native crypto, or card checkout during the current private sale.',
       accent: '#06b6d4',
     },
     {
       id: 'current-sale-stage',
       label: 'Current Sale Stage',
-      value: 'Pre-sale',
-      helper: 'The active sale route will be confirmed when launch timing is finalized.',
+      value: 'Private Sale',
+      helper: 'The current live sale window is the private-sale round.',
       accent: '#a78bfa',
     },
     {
       id: 'minimum-purchase',
       label: 'Minimum Purchase',
-      value: 'TBA',
-      helper: 'The minimum contribution threshold will be visible before wallet confirmation.',
+      value: '$100',
+      helper: 'The private sale opens at a minimum contribution of $100 per purchase.',
       accent: '#f59e0b',
     },
     {
       id: 'maximum-purchase',
       label: 'Maximum Purchase',
-      value: 'TBA',
-      helper: 'Per-wallet allocation caps will be announced alongside the final sale terms.',
+      value: '$10,000',
+      helper: 'The current private-sale cap is $10,000 per purchase allocation.',
       accent: '#d946ef',
     },
     {
       id: 'supported-network',
       label: 'Supported Network',
-      value: 'BNB Chain (BSC)',
-      helper: 'The current SPIN site and FAQ are aligned around the BNB Chain deployment path.',
+      value: 'ERC-20',
+      helper: 'Wallet-based participation is currently structured around the Ethereum ERC-20 network.',
       accent: '#22c55e',
     },
     {
       id: 'claim-vesting-start',
       label: 'Claim / Vesting Start',
-      value: 'After vesting period ends',
-      helper: 'Purchased tokens become claimable once the vesting window opens.',
+      value: 'TBA',
+      helper: 'Claim and vesting timing will be announced once the final distribution schedule is confirmed.',
       accent: '#f97316',
     },
   ],
@@ -127,10 +127,10 @@ export const SPIN_UTILITIES = [
 
 export const SPIN_FAQ = [
   { question: 'What is SPIN?', answer: 'SPIN is the utility token powering the SpinBattles gaming ecosystem. It is used for in-game purchases, player rewards, staking, tournament entry, NFT upgrades, and governance voting.' },
-  { question: 'Which blockchain is SPIN deployed on?', answer: 'SPIN is deployed on BNB Chain (BSC), offering fast transactions and low fees suitable for gaming applications.' },
-  { question: 'How do I buy SPIN?', answer: 'SPIN can be purchased during the token sale on this site, or on supported DEX platforms after the public launch. Connect your wallet and follow the instructions on the Buy Token page.' },
+  { question: 'Which blockchain is SPIN deployed on?', answer: 'SPIN is currently positioned as an ERC-20 token, with wallet participation structured around the Ethereum network standard.' },
+  { question: 'How do I buy SPIN?', answer: 'SPIN is currently offered through the private sale on this site. Buyers can participate using USDT, ETH, or credit card, subject to the current purchase limits shown in the sale overview.' },
   { question: 'What can I do with SPIN tokens?', answer: 'SPIN tokens are used within the SpinBattles ecosystem for in-game purchases, entering tournaments, staking for rewards, upgrading NFT assets, and participating in governance votes.' },
-  { question: 'When is the token launch?', answer: 'The public token launch is planned for Phase 3 of the roadmap. Join our community channels for the latest updates on the exact date.' },
+  { question: 'When is the token launch?', answer: 'SPIN is currently in the private-sale stage. Follow the official channels for updates on the public-sale timeline and broader launch milestones.' },
   { question: 'How does staking work?', answer: 'Token holders can lock SPIN in staking pools to earn yield over time. Staking also unlocks exclusive in-game benefits. Staking pools launch in Phase 5.' },
   { question: 'Is the game available now?', answer: 'SpinBattles is currently in development. A beta version is planned for Phase 4. Follow our roadmap and community channels for progress updates.' },
   { question: 'Is SPIN a financial investment?', answer: 'SPIN is a utility token designed for use within the SpinBattles gaming ecosystem. It does not constitute a security, financial instrument, or investment advice. Participation involves risk and SPIN may not be available in all jurisdictions.', isRiskDisclaimer: true },

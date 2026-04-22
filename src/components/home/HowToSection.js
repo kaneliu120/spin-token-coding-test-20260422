@@ -12,34 +12,34 @@ import Link from '@mui/material/Link';
 
 const step2Description = (
   <span>
-    $SPIN is currently positioned around the BNB Chain flow. MetaMask is a third-party browser wallet that works well for BSC-compatible participation. On Google Chrome, visit <Link href="https://metamask.io" underline="none" target="_blank" rel="noreferrer">metamask.io</Link> to download the extension and set up a wallet. On mobile, use MetaMask&apos;s app for iPhone or Android.
+    $SPIN is currently structured around the ERC-20 flow. MetaMask is a widely used wallet for Ethereum-compatible participation. On Google Chrome, visit <Link href="https://metamask.io" underline="none" target="_blank" rel="noreferrer">metamask.io</Link> to download the extension and set up a wallet. On mobile, use MetaMask&apos;s app for iPhone or Android.
   </span>
 )
 
 const steps = [
   {
     label: 'Choose your network',
-    description: '$SPIN is currently aligned to the BNB Chain flow. Choose the supported network in your wallet before entering the pre-sale page.',
+    description: '$SPIN is currently aligned to the ERC-20 flow. Choose the supported Ethereum-compatible network in your wallet before entering the private-sale page.',
   },
   {
     label: 'Create a MetaMask Wallet',
     description: step2Description,
   },
   {
-    label: 'Send BEP20 $BNB to MetaMask',
-    description: 'Acquire $BNB through MetaMask itself or transfer it to your MetaMask wallet address from another wallet (e.g. Coinbase or Binance).',
+    label: 'Prepare ETH, USDT, or card checkout',
+    description: 'Fund your wallet with ETH or USDT, or prepare to use the available credit-card checkout option during the private sale.',
   },
   {
-    label: 'Click On Pre-Sale',
-    description: 'Open the SPIN pre-sale page and review the current token sale terms before proceeding with your wallet connection.',
+    label: 'Open the Private Sale',
+    description: 'Open the SPIN private-sale page and review the confirmed token price, supported payment methods, and purchase limits before proceeding.',
   },
   {
     label: 'Swap into $SPIN',
-    description: 'Click Connect Wallet, enter the amount you want to use for the purchase, review the sale details, and then confirm the swap.',
+    description: 'Connect your wallet, choose your payment method, enter an amount between $100 and $10,000, review the sale details, and then confirm the purchase.',
   },
   {
     label: 'Claim $SPIN',
-    description: 'All $SPIN purchased can be claimed at the pre-sale page after the end of the vesting period.',
+    description: 'Claim and vesting timing is currently TBA. Buyers should watch the official sale updates for the final claim schedule.',
   },
 ];
 

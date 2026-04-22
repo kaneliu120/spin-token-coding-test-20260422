@@ -67,7 +67,7 @@ const SpinHeroSection = () => {
           className="spin-fade-in-up-3"
           sx={{ color: 'rgba(255,255,255,0.65)', fontSize: { xs: '1rem', md: '1.2rem' }, mb: 5, maxWidth: 600, mx: 'auto' }}
         >
-          Built for player rewards, digital ownership, and next-generation 3D gaming experiences.
+          Private sale is now open at $0.10 per SPIN, with support for USDT, ETH, and credit card purchases on the ERC-20 flow.
         </Typography>
 
         {/* CTAs */}
@@ -116,7 +116,7 @@ const SpinHeroSection = () => {
 
           <Button
             component="a"
-            href="/pre-sale"
+            href="/private-sale"
             variant="contained"
             size="large"
             sx={{
@@ -128,7 +128,7 @@ const SpinHeroSection = () => {
               '&:hover': { bgcolor: '#d97706' },
             }}
           >
-            Buy Token
+            Enter Private Sale
           </Button>
         </Stack>
       </Container>
