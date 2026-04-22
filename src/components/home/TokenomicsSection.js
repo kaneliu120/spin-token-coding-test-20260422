@@ -76,7 +76,7 @@ const TokenomicsSection = () => {
           Tokenomics
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 800, mx: 'auto', textAlign: 'center' }}>
-          During the presale, you will have the option to buy $ELO, presale will take place in two steps with different price, presale supports only BEP20 $BNB. All $ELO purchased can be claimed at the pre-sale page after the end of the vesting period.
+          During the presale, you will have the option to buy $SPIN. The presale can run in multiple stages with different pricing, and the active purchase route will be confirmed before launch. All $SPIN purchased can be claimed at the pre-sale page after the end of the vesting period.
         </Typography>
         <Typography 
           variant="h3" 

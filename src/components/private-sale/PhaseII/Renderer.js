@@ -12,7 +12,7 @@ import Chip from '@mui/material/Chip';
 import MediumIcon from '../../ui/icons/Medium'
 
 const data = [
-  {label: "Swap rate", value: "1 ELO=TBD $"},
+  {label: "Swap rate", value: "1 SPIN = TBD $"},
   {label: "Cap", value: "5,000,000,000"},
   {label: "Access", value: "Private"},
 ]

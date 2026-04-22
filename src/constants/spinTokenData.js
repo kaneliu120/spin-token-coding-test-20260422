@@ -38,6 +38,65 @@ export const SITE_CONFIG = {
   copyrightYear: new Date().getFullYear(),
 };
 
+export const SPIN_SALE_INFO = {
+  eyebrow: 'Sale Overview',
+  title: 'Key details for the SPIN token sale',
+  summary:
+    'Review the main sale terms before entering the purchase flow. Final pricing, allocation limits, and payment rails will be locked before the public launch.',
+  tokenPrice: {
+    value: 'TBA',
+    helper: 'Final public sale pricing will be announced before launch.',
+  },
+  status: {
+    label: 'Sale terms pending final confirmation',
+    note: 'Displayed values are structured for launch readiness and will be updated once the final sale configuration is published.',
+  },
+  metrics: [
+    {
+      id: 'accepted-payment-methods',
+      label: 'Accepted Payment Methods',
+      value: ['BNB', 'ETH'],
+      helper: 'Additional payment rails can be enabled once the final launch setup is confirmed.',
+      accent: '#06b6d4',
+    },
+    {
+      id: 'current-sale-stage',
+      label: 'Current Sale Stage',
+      value: 'Pre-sale',
+      helper: 'The active sale route will be confirmed when launch timing is finalized.',
+      accent: '#a78bfa',
+    },
+    {
+      id: 'minimum-purchase',
+      label: 'Minimum Purchase',
+      value: 'TBA',
+      helper: 'The minimum contribution threshold will be visible before wallet confirmation.',
+      accent: '#f59e0b',
+    },
+    {
+      id: 'maximum-purchase',
+      label: 'Maximum Purchase',
+      value: 'TBA',
+      helper: 'Per-wallet allocation caps will be announced alongside the final sale terms.',
+      accent: '#d946ef',
+    },
+    {
+      id: 'supported-network',
+      label: 'Supported Network',
+      value: 'BNB Chain (BSC)',
+      helper: 'The current SPIN site and FAQ are aligned around the BNB Chain deployment path.',
+      accent: '#22c55e',
+    },
+    {
+      id: 'claim-vesting-start',
+      label: 'Claim / Vesting Start',
+      value: 'After vesting period ends',
+      helper: 'Purchased tokens become claimable once the vesting window opens.',
+      accent: '#f97316',
+    },
+  ],
+};
+
 export const SPIN_ALLOCATIONS = [
   { name: 'Ecosystem & Rewards', percentage: 35, tokenAmount: 350_000_000, color: '#7c3aed', vestingSchedule: 'Released over 36 months, 10% at TGE', lockupMonths: 0 },
   { name: 'Team & Founders',     percentage: 15, tokenAmount: 150_000_000, color: '#06b6d4', vestingSchedule: '12-month cliff, then 24-month linear vesting', lockupMonths: 12 },

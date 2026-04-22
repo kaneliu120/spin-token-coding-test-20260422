@@ -189,7 +189,7 @@ const Ended = () => {
               ))}
             </CardContent>
             <CardActions sx={{justifyContent: 'center'}}>
-              <Typography color="text.secondary" variant="caption" display="block" sx={{fontWeight: 500}}>All ELO purchased can be claimed after the end of the vesting period</Typography>
+              <Typography color="text.secondary" variant="caption" display="block" sx={{fontWeight: 500}}>All SPIN purchased can be claimed after the end of the vesting period</Typography>
             </CardActions>
           </Card>
         </Grid>

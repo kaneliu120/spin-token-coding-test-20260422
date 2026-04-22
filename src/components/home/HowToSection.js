@@ -12,14 +12,14 @@ import Link from '@mui/material/Link';
 
 const step2Description = (
   <span>
-    $ELO token is available on the BSC blockchain. MetaMask is a third party BEP20 (Binance) browser wallet, and the very best at that! On Google Chrome, visit <Link href="https://metamask.io" underline="none" target="_blank" rel="noreferrer">metamask.io</Link> to download the extension and set up a wallet. On mobile? Get MetaMask&apos;s app for iPhone or Android
+    $SPIN is currently positioned around the BNB Chain flow. MetaMask is a third-party browser wallet that works well for BSC-compatible participation. On Google Chrome, visit <Link href="https://metamask.io" underline="none" target="_blank" rel="noreferrer">metamask.io</Link> to download the extension and set up a wallet. On mobile, use MetaMask&apos;s app for iPhone or Android.
   </span>
 )
 
 const steps = [
   {
     label: 'Choose your network',
-    description: '$ELO is available in BSC, Binance Smart Chain networks. Choose your network from here BSC “DROP DOWN MENU” “Same as in toolbar” to participate in $ELO pre-sale',
+    description: '$SPIN is currently aligned to the BNB Chain flow. Choose the supported network in your wallet before entering the pre-sale page.',
   },
   {
     label: 'Create a MetaMask Wallet',
@@ -31,15 +31,15 @@ const steps = [
   },
   {
     label: 'Click On Pre-Sale',
-    description: 'You can currently swap BNB to $ELO on Pre-Sale over ELO\'s official website! Pre-Sale supports only BEP20 BNB.',
+    description: 'Open the SPIN pre-sale page and review the current token sale terms before proceeding with your wallet connection.',
   },
   {
-    label: 'Swap BEP20 $BNB to $ELO',
-    description: 'Click Connect Wallet Enter the amount of $BNB you would like to swap for $ELO. Then click on Swap.',
+    label: 'Swap into $SPIN',
+    description: 'Click Connect Wallet, enter the amount you want to use for the purchase, review the sale details, and then confirm the swap.',
   },
   {
-    label: 'Claim $ELO',
-    description: 'All $ELO purchased can be claimed at the pre-sale page after the end of the vesting period.',
+    label: 'Claim $SPIN',
+    description: 'All $SPIN purchased can be claimed at the pre-sale page after the end of the vesting period.',
   },
 ];
 
@@ -64,7 +64,7 @@ const HowToSection = () => {
 
   return (
     <Box
-      id="getELO"  
+      id="getSPIN"
       sx={{py: 7, borderTop: 1, borderBottom: 1, borderColor: "grey.100" }}
     >
       <Container>
@@ -81,7 +81,7 @@ const HowToSection = () => {
           color="text.primary"
           sx={{ fontWeight: 'bold', pb: 6, textAlign: 'center' }}
         >
-          How to get $ELO
+          How to get $SPIN
         </Typography>
         <Grid container spacing={0} justifyContent="center">
           <Grid item xs={12} md={6}>

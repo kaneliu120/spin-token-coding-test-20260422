@@ -18,7 +18,7 @@ export default function PreSale() {
             Pre-sale
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            During the pre-sale, you will have the option to buy $ELO. All $ELO purchased can be claimed after the end of the vesting period.
+            During the pre-sale, you will have the option to buy $SPIN. All $SPIN purchased can be claimed after the end of the vesting period.
           </Typography>
         </Box>
       </Container>
