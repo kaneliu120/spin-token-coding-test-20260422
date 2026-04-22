@@ -4,11 +4,14 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Link as RouterLink } from 'react-router-dom';
 import { SITE_CONFIG } from '../../constants/spinTokenData';
 import spinLogo from '../../assets/images/spin.png';
+import { useAppAuth } from '../../providers/AuthProvider/AuthProvider';
 
 const SpinHeroSection = () => {
   const { whitepaperUrl, communityLinks } = SITE_CONFIG;
+  const { isAccessReady } = useAppAuth();
 
   return (
     <Box
@@ -67,7 +70,7 @@ const SpinHeroSection = () => {
           className="spin-fade-in-up-3"
           sx={{ color: 'rgba(255,255,255,0.65)', fontSize: { xs: '1rem', md: '1.2rem' }, mb: 5, maxWidth: 600, mx: 'auto' }}
         >
-          Private sale is now open at $0.10 per SPIN, with support for USDT, ETH, and credit card purchases on the ERC-20 flow.
+          Private sale access is now open at $0.10 per SPIN. Complete access setup to continue into the currently configured purchase flow.
         </Typography>
 
         {/* CTAs */}
@@ -115,8 +118,8 @@ const SpinHeroSection = () => {
           </Button>
 
           <Button
-            component="a"
-            href="/private-sale"
+            component={RouterLink}
+            to={isAccessReady ? '/private-sale' : '/auth'}
             variant="contained"
             size="large"
             sx={{
@@ -128,7 +131,7 @@ const SpinHeroSection = () => {
               '&:hover': { bgcolor: '#d97706' },
             }}
           >
-            Enter Private Sale
+            {isAccessReady ? 'Enter Private Sale' : 'Complete Access Setup'}
           </Button>
         </Stack>
       </Container>

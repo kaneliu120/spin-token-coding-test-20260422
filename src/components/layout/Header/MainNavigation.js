@@ -12,6 +12,7 @@ import Contracts from '../../shared/Contracts';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideDrawer from './SideDrawer';
+import { useAppAuth } from '../../../providers/AuthProvider/AuthProvider';
 
 // const mainLinks = [
 //   { label: "Home", href: "/" },
@@ -25,11 +26,6 @@ const mainLinks = [
 const presaleLink = { 
   label: "Pre-sale", 
   href: "/pre-sale" 
-}
-
-const privateLink = { 
-  label: "Private-sale", 
-  href: "/private-sale" 
 }
 
 // const bridgeLink = {
@@ -49,8 +45,13 @@ const moreMenuLinks = [
 
 const MainNavigation = () => {
   const { pathname } = useLocation();
+  const { isAccessReady } = useAppAuth();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [contractsDialogOpen, setContractsDialogOpen] = useState(false);
+  const privateLink = { 
+    label: "Private-sale", 
+    href: isAccessReady ? "/private-sale" : "/auth",
+  };
 
   // The /spin page has its own SpinNavBar — hide the main nav entirely
   if (pathname === '/spin' || pathname.startsWith('/spin')) return null;

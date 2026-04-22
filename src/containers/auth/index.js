@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -19,7 +19,7 @@ import { useWalletConnector, setNet } from '../../components/account/WalletConne
 
 const AuthPage = () => {
   const {
-    gmail,
+    prefillGmail,
     mode,
     walletAddress,
     isWalletConnected,
@@ -30,35 +30,50 @@ const AuthPage = () => {
     isGmailAddress,
   } = useAppAuth();
   const { loginMetamask } = useWalletConnector();
-  const [gmailInput, setGmailInput] = useState(gmail);
+  const [gmailInput, setGmailInput] = useState(prefillGmail);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setGmailInput(prefillGmail);
+  }, [prefillGmail]);
 
   const pageCopy = useMemo(() => (
     mode === 'signup'
       ? {
           title: 'Create your SPIN access',
-          subtitle: 'Sign up with your Gmail account and wallet address before entering the buy flow.',
+          subtitle: 'Save a Gmail entry for the exact wallet you want to use before entering the private-sale flow.',
           action: 'Complete Sign Up',
         }
       : {
           title: 'Log in to continue buying SPIN',
-          subtitle: 'Use the same Gmail account and wallet address you plan to use in the token sale flow.',
+          subtitle: 'Use the same Gmail address and wallet combination you plan to use in the private-sale flow.',
           action: 'Log In',
         }
   ), [mode]);
 
   const handleSave = () => {
+    if (!isWalletConnected) {
+      setError('Connect the wallet you want to use in the current private-sale flow before saving a Gmail entry.');
+      return;
+    }
+
     const nextGmail = gmailInput.trim();
     if (!isGmailAddress(nextGmail)) {
       setError('Please enter a valid Gmail address.');
       return;
     }
-    saveProfile(nextGmail, mode);
+
+    const didSave = saveProfile(nextGmail, mode);
+    if (!didSave) {
+      setError('Wallet connection is required before saving access setup.');
+      return;
+    }
+
     setError('');
   };
 
   const handleConnectWallet = () => {
-    setNet(0);
+    setNet(1);
     loginMetamask();
   };
 
@@ -91,6 +106,9 @@ const AuthPage = () => {
             <Typography sx={{ color: 'rgba(255,255,255,0.7)', maxWidth: 680, lineHeight: 1.7, mb: 4 }}>
               {pageCopy.subtitle}
             </Typography>
+            <Typography sx={{ color: 'rgba(255,255,255,0.55)', maxWidth: 680, lineHeight: 1.7, mb: 4 }}>
+              This page stores your Gmail entry locally in this browser and links it to the connected wallet. It does not perform Google OAuth.
+            </Typography>
 
             <Tabs
               value={mode}
@@ -115,8 +133,8 @@ const AuthPage = () => {
                 <CardContent>
                   <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
                     <GoogleIcon sx={{ color: '#67e8f9' }} />
-                    <Typography sx={{ color: '#fff', fontWeight: 700 }}>Gmail account</Typography>
-                    {isGmailConnected ? <Chip size="small" icon={<CheckCircleIcon />} label="Connected" color="success" /> : null}
+                    <Typography sx={{ color: '#fff', fontWeight: 700 }}>Gmail access entry</Typography>
+                    {isGmailConnected ? <Chip size="small" icon={<CheckCircleIcon />} label="Saved for this wallet" color="success" /> : null}
                   </Stack>
                   <TextField
                     fullWidth
@@ -126,7 +144,14 @@ const AuthPage = () => {
                     placeholder="yourname@gmail.com"
                     variant="outlined"
                     error={Boolean(error)}
-                    helperText={error || 'Use a Gmail address for sign-up or log-in.'}
+                    helperText={
+                      error
+                      || (
+                        isWalletConnected
+                          ? 'This Gmail entry is saved locally for the connected wallet only.'
+                          : 'Connect the wallet you will use in the current private-sale flow, then save a Gmail entry for it.'
+                      )
+                    }
                     InputLabelProps={{ shrink: true }}
                     sx={{
                       mb: 2,
@@ -158,7 +183,7 @@ const AuthPage = () => {
                   <Typography sx={{ color: 'rgba(255,255,255,0.68)', mb: 2 }}>
                     {isWalletConnected
                       ? `Connected wallet: ${walletAddress}`
-                      : 'Connect your wallet to use the buyToken page and complete the account setup.'}
+                      : 'Connect the wallet you will use in the current private-sale flow, then save a Gmail entry for that wallet.'}
                   </Typography>
                   <Button variant="outlined" startIcon={<WalletIcon />} onClick={handleConnectWallet}>
                     {isWalletConnected ? 'Reconnect Wallet' : 'Connect Wallet'}
@@ -179,8 +204,8 @@ const AuthPage = () => {
               <Typography sx={{ fontWeight: 700, mb: 1 }}>Current access status</Typography>
               <Typography sx={{ color: 'rgba(255,255,255,0.72)', mb: 2 }}>
                 {isAccessReady
-                  ? 'Your Gmail account and wallet address are connected. You can continue to the buyToken page.'
-                  : 'Complete both Gmail and wallet connection to unlock the buyToken flow.'}
+                  ? 'Your current wallet has a saved Gmail access entry. You can continue to the private-sale page and use the buy action for this wallet.'
+                  : 'Complete wallet connection and save a Gmail entry for this wallet before using the buy action.'}
               </Typography>
               <Button
                 component={RouterLink}
@@ -189,7 +214,7 @@ const AuthPage = () => {
                 color="secondary"
                 disabled={!isAccessReady}
               >
-                Continue to buyToken page
+                Continue to private sale
               </Button>
             </Box>
           </CardContent>

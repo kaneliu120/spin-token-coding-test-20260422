@@ -14,7 +14,7 @@ const Unauthenticated = () => {
         startIcon={<WalletIcon />}
         sx={{ boxShadow: 'rgb(0 0 0 / 8%) 0px 8px 28px', borderRadius: 5 }}
       >
-        Authenticate
+        Access Setup
       </Button>
     </Fragment>
   );

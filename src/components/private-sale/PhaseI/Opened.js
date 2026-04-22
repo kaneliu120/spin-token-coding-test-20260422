@@ -15,6 +15,7 @@ import Alert from '../../ui/Alert';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import moment from 'moment';
+import { Link as RouterLink } from 'react-router-dom';
 import { useAppAuth } from '../../../providers/AuthProvider/AuthProvider';
 
 const PresaleContractAddress = [
@@ -35,6 +36,10 @@ const netChainId = [
   0x3,  //Ropsten
   0x38  //BSC testnet 2A kovan
 ];
+
+const ACTIVE_CHAIN_INDEX = 1;
+const ACTIVE_CHAIN_ID = netChainId[ACTIVE_CHAIN_INDEX];
+const ACTIVE_CHAIN_NAME = 'BNB Smart Chain (56)';
 
 const CardLabel = ({text}) => {
   return (<Typography 
@@ -70,27 +75,26 @@ const Opened = ({ setActiveStep }) => {
 
   const {account, library} = useWeb3React();
   const { isAccessReady, isGmailConnected, gmail } = useAppAuth();
+  const currentChainId = Number(library?.provider?.chainId);
+  const isSupportedSaleChain = currentChainId === ACTIVE_CHAIN_ID;
 
   useEffect(() => {
     // Update step based on wallet connection and network
     if (!account || !library) {
       setActiveStep(-1); // No wallet connected
-    } else if (library.provider && (
-      parseInt(library.provider.chainId) === netChainId[0] || 
-      parseInt(library.provider.chainId) === netChainId[1]
-    )) {
+    } else if (library.provider && isSupportedSaleChain) {
       setActiveStep(1); // Wallet connected and network chosen
     } else if (library.provider) {
       setActiveStep(0); // Wallet connected but wrong network
     }
-  }, [account, library, setActiveStep]);
+  }, [account, isSupportedSaleChain, library, setActiveStep]);
 
   useEffect(() => {
     // Update step when amount is entered
-    if (account && library && amountToBuy > 0) {
+    if (account && library && isSupportedSaleChain && amountToBuy > 0) {
       setActiveStep(2); // Amount entered
     }
-  }, [amountToBuy, account, library, setActiveStep]);
+  }, [amountToBuy, account, isSupportedSaleChain, library, setActiveStep]);
 
   useEffect(() => {
     if(!library) {
@@ -103,20 +107,17 @@ const Opened = ({ setActiveStep }) => {
       return
     }
 
-    //console.log(parseInt(library.provider.chainId), "net chain id");
-    if(parseInt(library.provider.chainId) === netChainId[0]) {
-      chainindex = 0
-      getInfo()
-    } else if(parseInt(library.provider.chainId) === netChainId[1]) {
-      chainindex = 1
+    if(isSupportedSaleChain) {
+      chainindex = ACTIVE_CHAIN_INDEX
       getInfo()
     } else {
+      Init()
       setOpenAlert(true)
-      setAlertMsg('Selected chain is unrecognized')
+      setAlertMsg(`Private sale is available on ${ACTIVE_CHAIN_NAME}`)
     }   
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account, library])
+  }, [account, isSupportedSaleChain, library])
 
   const Init = () => {
     setAmountToBuy(1)
@@ -124,7 +125,7 @@ const Opened = ({ setActiveStep }) => {
     setPresaleInfo([])
     setStatus([])
     setBuyerInfo([])
-    setPresaleState('')
+    setPresaleState(0)
   }
 
   const getContract = (abi, address, signer = null) => {
@@ -146,12 +147,7 @@ const Opened = ({ setActiveStep }) => {
 
     presalecontract = getContract(PRESALE_ABI, PresaleContractAddress[chainindex], signer)
    
-    let chainSuffix = ""
-    if(parseInt(library.provider.chainId) === netChainId[0]) {
-      chainSuffix = "ETH"
-    } else {
-      chainSuffix = "BNB"
-    }
+    const chainSuffix = "BNB"
 
 
     let presaleinfo;
@@ -256,6 +252,11 @@ const Opened = ({ setActiveStep }) => {
   const Deposit = async (amount) => {
 
     let presalecontract;
+    if(!isAccessReady) {
+      setOpenAlert(true)
+      setAlertMsg('Complete local access setup on /auth with the connected wallet before buying')
+      return null;
+    }
     if(!account) {
       setOpenAlert(true)
       setAlertMsg('Wallet is unconnected')
@@ -264,12 +265,9 @@ const Opened = ({ setActiveStep }) => {
 
     const signer = await library.getSigner();
     presalecontract = getContract(PRESALE_ABI, PresaleContractAddress[chainindex], signer)
-    if(
-      parseInt(library.provider.chainId) !== netChainId[0]
-      && parseInt(library.provider.chainId) !== netChainId[1]
-    ) {  
+    if(!isSupportedSaleChain) {  
       setOpenAlert(true)
-      setAlertMsg('Selected chain is unrecognized')
+      setAlertMsg(`Please switch to ${ACTIVE_CHAIN_NAME}`)
       return
     }
 
@@ -309,12 +307,9 @@ const Opened = ({ setActiveStep }) => {
 
     const signer = await library.getSigner();
     presalecontract = getContract(PRESALE_ABI, PresaleContractAddress[chainindex], signer)
-    if(
-      parseInt(library.provider.chainId) !== netChainId[0]
-      && parseInt(library.provider.chainId) !== netChainId[1]
-    ) {  
+    if(!isSupportedSaleChain) {  
       setOpenAlert(true)
-      setAlertMsg('Selected chain is unrecognized')
+      setAlertMsg(`Please switch to ${ACTIVE_CHAIN_NAME}`)
       return
     }
 
@@ -344,12 +339,9 @@ const Opened = ({ setActiveStep }) => {
 
     const signer = await library.getSigner();
     presalecontract = getContract(PRESALE_ABI, PresaleContractAddress[chainindex], signer)
-    if(
-      parseInt(library.provider.chainId) !== netChainId[0] 
-      && parseInt(library.provider.chainId) !== netChainId[1]
-    ) {
+    if(!isSupportedSaleChain) {
       setOpenAlert(true)
-      setAlertMsg('Selected chain is unrecognized')
+      setAlertMsg(`Please switch to ${ACTIVE_CHAIN_NAME}`)
       return
     }
 
@@ -405,12 +397,20 @@ const Opened = ({ setActiveStep }) => {
         return null
     }
 
+    if (presaleState === 1 && !isAccessReady) {
+      return (
+        <Button
+          component={RouterLink}
+          to="/auth"
+          fullWidth
+          variant="contained"
+        >
+          Complete access setup
+        </Button>
+      )
+    }
+
     const execFunc = async () => {
-      if (!isAccessReady) {
-        setOpenAlert(true)
-        setAlertMsg('Please sign up or log in with a Gmail account and connect your wallet before buying')
-        return;
-      }
       switch(presaleState) {
         case 1:
           label = 'Buy'
@@ -458,8 +458,6 @@ const Opened = ({ setActiveStep }) => {
       switch(parseInt(library.provider.chainId)) {
         case netChainId[1]:
           return '$BNB'
-        case netChainId[0]:
-          return '$ETH'
         default:
           return 'Unknown'
       }
@@ -555,12 +553,12 @@ const Opened = ({ setActiveStep }) => {
                 <Fragment>
                   {!isGmailConnected && (
                     <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1.5, color: 'warning.main'}}>
-                      Gmail sign-in is required before the buy action is enabled.
+                      Complete local access setup on /auth with this wallet before buying.
                     </Typography>
                   )}
                   {isGmailConnected && (
                     <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1.5, color: 'success.main'}}>
-                      Gmail connected: {gmail}
+                      Access setup ready for this wallet: {gmail}
                     </Typography>
                   )}
                   <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1}}>Buy SPIN Token</Typography>

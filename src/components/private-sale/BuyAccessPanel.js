@@ -17,8 +17,8 @@ const BuyAccessPanel = () => {
 
   const connectionItems = [
     {
-      label: 'Gmail account',
-      value: isGmailConnected ? gmail : 'Not connected',
+      label: 'Gmail access entry',
+      value: isGmailConnected ? `${gmail} (saved)` : 'Not saved for this wallet',
       icon: <MailOutlineIcon fontSize="small" />,
       ready: isGmailConnected,
     },
@@ -49,10 +49,10 @@ const BuyAccessPanel = () => {
         >
           <Box sx={{ maxWidth: 620 }}>
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-              Account connectivity for buyToken
+              Private-sale access setup
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 2 }}>
-              Users must be connected with both a Gmail account and a wallet address before completing the buy flow.
+              Complete local access setup on /auth before using the buy action. The saved Gmail entry is tied to the connected wallet.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} flexWrap="wrap">
               {connectionItems.map((item) => (
@@ -76,7 +76,7 @@ const BuyAccessPanel = () => {
               variant={isAccessReady ? 'outlined' : 'contained'}
               startIcon={<LoginIcon />}
             >
-              {isAccessReady ? 'Manage access' : 'Sign up / Log in'}
+              {isAccessReady ? 'Review access setup' : 'Complete access setup'}
             </Button>
           </Box>
         </Stack>
