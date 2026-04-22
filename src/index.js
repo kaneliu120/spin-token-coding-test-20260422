@@ -4,6 +4,7 @@ import App from "./App";
 import { MoralisProvider } from "react-moralis";
 import "./index.css";
 import { MoralisDappProvider } from "./providers/MoralisDappProvider/MoralisDappProvider";
+import { AuthProvider } from "./providers/AuthProvider/AuthProvider";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Web3ReactProvider } from '@web3-react/core'
@@ -58,12 +59,14 @@ const Application = () => {
   return (
     <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <MoralisDappProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
+        <AuthProvider>
+          <MoralisDappProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
           </MoralisDappProvider>
+        </AuthProvider>
       </Web3ReactProvider>  
     </MoralisProvider>
   );

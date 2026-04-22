@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import PhaseI from '../../components/private-sale/PhaseI/Renderer';
 import PreSaleSteps from 'components/private-sale/PreSaleSteps';
+import BuyAccessPanel from 'components/private-sale/BuyAccessPanel';
 //import Ended from './Ended';
 
 export default function PreSale() {
@@ -52,6 +53,7 @@ export default function PreSale() {
           >
             Grab your SPIN token now and enjoy vast benefits as part of the SpinBattles gaming ecosystem.
           </Typography>
+          <BuyAccessPanel />
           <PreSaleSteps activeStep={activeStep} />
           <PhaseI setActiveStep={setActiveStep} />
         </Container>

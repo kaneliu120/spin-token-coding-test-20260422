@@ -17,6 +17,7 @@ import PrivateSale from "containers/private-sale";
 import Mint from "containers/mint";
 import Stake from "containers/stake";
 import SpinTokenPage from "containers/spin";
+import AuthPage from "containers/auth";
 
 const AppLayout = () => {
   const { library, account } = useWeb3React();
@@ -45,6 +46,7 @@ const AppLayout = () => {
           <Route exact path="/mint" component={Mint} />
           <Route exact path="/stake" component={Stake} />
           <Route exact path="/spin" component={SpinTokenPage} />
+          <Route exact path="/auth" component={AuthPage} />
           <Route exact path="/nonauthenticated">
             <>Please login using the "Authenticate" button</>
           </Route>

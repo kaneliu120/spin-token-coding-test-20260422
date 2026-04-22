@@ -15,6 +15,7 @@ import Alert from '../../ui/Alert';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import moment from 'moment';
+import { useAppAuth } from '../../../providers/AuthProvider/AuthProvider';
 
 const PresaleContractAddress = [
   "",
@@ -68,6 +69,7 @@ const Opened = ({ setActiveStep }) => {
   const [openAlert, setOpenAlert] = useState(false);
 
   const {account, library} = useWeb3React();
+  const { isAccessReady, isGmailConnected, gmail } = useAppAuth();
 
   useEffect(() => {
     // Update step based on wallet connection and network
@@ -404,6 +406,11 @@ const Opened = ({ setActiveStep }) => {
     }
 
     const execFunc = async () => {
+      if (!isAccessReady) {
+        setOpenAlert(true)
+        setAlertMsg('Please sign up or log in with a Gmail account and connect your wallet before buying')
+        return;
+      }
       switch(presaleState) {
         case 1:
           label = 'Buy'
@@ -546,6 +553,16 @@ const Opened = ({ setActiveStep }) => {
               )}
               {presaleState === 1 && (
                 <Fragment>
+                  {!isGmailConnected && (
+                    <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1.5, color: 'warning.main'}}>
+                      Gmail sign-in is required before the buy action is enabled.
+                    </Typography>
+                  )}
+                  {isGmailConnected && (
+                    <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1.5, color: 'success.main'}}>
+                      Gmail connected: {gmail}
+                    </Typography>
+                  )}
                   <Typography variant='caption' display="block" sx={{fontWeight: 700, mb: 1}}>Buy SPIN Token</Typography>
                   <TextField
                     type="number"
